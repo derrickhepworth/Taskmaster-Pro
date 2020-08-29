@@ -53,6 +53,30 @@ $(".list-group").on("click", "p", function(){
   console.log(text);
 });
 
+//due date was clicked 
+$(".list-group").on("click", "span", function(){
+
+  //get current text
+  var date = $(this)
+  .text()
+  .trim();
+
+  //create new input element
+  var dateInput = $("<input>")
+  .attr("type", "text")
+  addClass("form-control")
+  .val(date);
+
+  //swap out elements
+  $(this).replaceWith(dateInput);
+
+
+  //auto focus new element
+  dateInput.trigger("focus");
+
+
+});
+
 $(".list-group").on("blur", "textarea", function(){
 // <textarea> current value
 var text = $(this).val().trim();
