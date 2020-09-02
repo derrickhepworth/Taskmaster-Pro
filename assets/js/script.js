@@ -116,6 +116,8 @@ $(".list-group").on("change", "input[type='text']", function () {
 
   // replace input with span element
   $(this).replaceWith(taskSpan);
+
+  auditTask($(taskSpan).closest(".list-group-item"));
 });
 
 $(".list-group").on("blur", "textarea", function () {
@@ -268,9 +270,11 @@ var auditTask = function (taskEl) {
   $(taskEl).removeClass("list-group-item-warning list-group-item-danger");
 
   // apply new class if task is near/over due date
-  if(moment().isAfter(time)){
+  if (moment().isAfter(time)) {
     $(taskEl).addClass("list-group-item-danger");
-  }
+  } else if (Math.abs(moment().diff(time, "days")) <= 2) {
+    $(taskEl).addClass("list-group-item-warning");
+  } 
 
 };
 
